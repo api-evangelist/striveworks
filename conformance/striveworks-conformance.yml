@@ -1,0 +1,127 @@
+generated: '2026-08-05'
+method: searched
+source: >-
+  https://production.chariot.striveworks.us/docs/user_guide/administration/authentication ;
+  https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols ;
+  https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/configuration/mcp-connections
+summary: >-
+  Chariot's cross-cutting standards posture, read from the published documentation. The platform's
+  strongest conformance signals are on the inference side — it implements and names the KServe v2 /
+  Open Inference Protocol and an OpenAI-compatible protocol — and on auth, where it uses the OAuth 2.0
+  client-credentials grant with RFC 6750 bearer tokens. It is an MCP client, not an MCP server. No
+  compliance certifications (SOC 2, ISO 27001, FedRAMP, IL4/IL5) are published on any public
+  Striveworks surface, so no Compliance pointer is emitted.
+standards:
+  - id: oauth2-client-credentials
+    name: OAuth 2.0 client credentials grant (RFC 6749 §4.4)
+    conforms: true
+    evidence: >-
+      POST /auth/client/v2/chariot/login with client_id, client_secret and grant_type=client_credentials
+      as application/x-www-form-urlencoded; response carries access_token and expires_in.
+    source: https://production.chariot.striveworks.us/docs/user_guide/administration/authentication
+  - id: rfc6750-bearer
+    name: OAuth 2.0 Bearer Token Usage (RFC 6750)
+    conforms: true
+    evidence: 'Authorization: Bearer <access_token> header required on all API requests; anonymous requests return 401 {"error":"invalid bearer token"}.'
+    source: https://production.chariot.striveworks.us/docs/user_guide/administration/authentication
+  - id: rfc8414-oauth-metadata
+    name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+    conforms: false
+    evidence: '/.well-known/oauth-authorization-server returned 404 on the observed Chariot instance.'
+  - id: openid-connect-discovery
+    name: OpenID Connect Discovery
+    conforms: false
+    evidence: '/.well-known/openid-configuration returned 404 on both striveworks.com and the observed Chariot instance.'
+  - id: mutual-tls
+    name: PKI / mutual-TLS client authentication
+    conforms: true
+    evidence: >-
+      Documented PKCS#12 and separate certificate/key file authentication, usable with or without a
+      bearer token, for environments that require PKI.
+    source: https://production.chariot.striveworks.us/docs/user_guide/administration/authentication
+  - id: kserve-v2-open-inference-protocol
+    name: KServe v2 / Open Inference Protocol
+    conforms: true
+    evidence: >-
+      chariot-v2-kserve is a Chariot-recognized Inference Protocol; documented request payloads use the
+      Open Inference Protocol shape (inputs[] with name, shape, datatype, data, parameters).
+    source: https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols
+  - id: openai-compatible-api
+    name: OpenAI-compatible inference API
+    conforms: true
+    evidence: >-
+      openai-v1 and chariot-v1-openai are recognized Inference Protocols; token metrics are reported for
+      models served through the OpenAI proxy engine and the Azure OpenAI inference engine.
+    source: https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols
+  - id: torchserve
+    name: TorchServe inference protocol
+    conforms: true
+    evidence: chariot-v1-torchserve is a Chariot-recognized Inference Protocol.
+    source: https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols
+  - id: huggingface-hub
+    name: Hugging Face Hub model import / inference
+    conforms: true
+    evidence: >-
+      huggingface-hub-v1 is a recognized Inference Protocol; Chariot imports models from Hugging Face
+      with a file-tree selector and revision pinning, and serves them via Transformers.
+    source: https://production.chariot.striveworks.us/docs/user_guide/catalog-models/importing-models/huggingface/
+  - id: mcp
+    name: Model Context Protocol
+    conforms: partial
+    role: client
+    evidence: >-
+      Chariot consumes remote MCP servers through MCP Connections (transport streamable_http, endpoint,
+      auth header map), referenced from mcp_tools on Tool Use Profiles. Striveworks does not publish a
+      hosted MCP server of its own; /api/mcp/v1 and /api/mcp/v2 exist on the platform but return 401 to
+      anonymous tools/list requests.
+    source: https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/configuration/mcp-connections
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: '/.well-known/agent-card.json and /.well-known/agent.json returned 404 on striveworks.com and on the Chariot instance.'
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: >-
+      No OpenAPI or Swagger document is published. /openapi.json, /openapi.yaml, /swagger.json,
+      /api-docs, /redoc all 404 on the docs/API host; /api/{service}/v2/openapi.json returns 401 for
+      real services, so any spec that exists is behind the bearer token.
+  - id: rfc9457-problem-details
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: 'Observed error envelope is {"error":"<message>"} as application/json, not application/problem+json.'
+  - id: rfc9116-security-txt
+    name: security.txt (RFC 9116)
+    conforms: false
+    evidence: '/.well-known/security.txt returned 404 on striveworks.com and on the Chariot instance.'
+  - id: llms-txt
+    name: llms.txt
+    conforms: true
+    evidence: 'https://www.striveworks.com/llms.txt returns 200 text/plain, 3187 bytes, valid llms.txt structure.'
+    source: https://www.striveworks.com/llms.txt
+  - id: rbac
+    name: Role-based access control
+    conforms: true
+    evidence: >-
+      Published organization/project role model (Owner, Maintainer, Contributor / Owner, Writer, Reader)
+      with a full permission table and visibility modifiers.
+    source: https://production.chariot.striveworks.us/docs/user_guide/administration/roles-permissions
+compliance_certifications:
+  published: false
+  searched:
+    - https://www.striveworks.com/
+    - https://www.striveworks.com/llms.txt
+    - https://www.striveworks.com/security (404)
+    - https://www.striveworks.com/trust (404)
+    - trust.striveworks.com (NXDOMAIN)
+  note: >-
+    Striveworks sells into US defense and federal customers and publicly references US Army, Navy and
+    federal contracts, but publishes no certification list, trust center or compliance page. Absence of
+    a published program is recorded here as data — it is not a claim that no certifications exist.
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/user_guide/administration/authentication', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/configuration/mcp-connections', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://www.striveworks.com/llms.txt', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/openapi.json', http_status: 404}
+  - {fetched: '2026-08-05', url: 'https://www.striveworks.com/.well-known/agent-card.json', http_status: 404}

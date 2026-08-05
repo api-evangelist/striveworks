@@ -1,0 +1,35 @@
+generated: '2026-08-05'
+method: probed
+source: probe of /.well-known/* on every Striveworks host in apis.yml
+summary: >-
+  No /.well-known/ discovery surface is published on any Striveworks host. Every probe below returned
+  404. Recorded as an honest negative so a later run does not re-litigate it; no WellKnown or SecurityTxt
+  pointer is wired into apis.yml because there is nothing to point at.
+hosts:
+  - host: https://www.striveworks.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: https://production.chariot.striveworks.us
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+      - {path: /.well-known/mcp.json, status: 404}
+      - {path: /auth/.well-known/openid-configuration, status: 404}
+      - {path: /auth/realms/chariot/.well-known/openid-configuration, status: 404}
+notes: >-
+  The 404s on production.chariot.striveworks.us are genuine gateway 404s ("404 page not found",
+  text/plain, 18 bytes), not a single-page-app catch-all — the same host answers 401 with
+  {"error":"invalid bearer token"} for real API routes, which is the control that separates the two.
+  On www.striveworks.com the Webflow site does return 200 for many unknown paths by redirecting to the
+  homepage, but the /.well-known/* paths above returned a real 404 status.
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://www.striveworks.com/.well-known/security.txt', http_status: 404}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/.well-known/openid-configuration', http_status: 404}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/api/identity/v2/users/me/', http_status: 401, note: 'control path proving the 404s above are route-aware'}

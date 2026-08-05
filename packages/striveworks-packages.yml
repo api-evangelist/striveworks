@@ -1,0 +1,78 @@
+generated: '2026-08-05'
+method: searched
+source: >-
+  https://production.chariot.striveworks.us/docs/sdk/sdk ; https://pypi.org/project/valor-lite/ ;
+  https://github.com/Striveworks
+summary: >-
+  Striveworks ships one first-party API client SDK — the Chariot Python SDK (`chariot-client`), which
+  also installs the `chariot` CLI — but distributes it from each customer's own Chariot deployment and
+  from the bundled Armory registry rather than from public PyPI. The one Striveworks library published
+  to a public registry is `valor-lite`, their open-source ML evaluation library. No first-party client
+  library was found on npm, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist or crates.io.
+packages:
+  - language: python
+    registry: chariot-instance
+    name: chariot-client
+    url: https://production.chariot.striveworks.us/docs/sdk/sdk
+    install: pip install https://<chariot_host>/docs/static/chariot_client-0.26.2-py3-none-any.whl
+    official: true
+    role: api-client
+    ships_cli: chariot
+    api_docs: https://production.chariot.striveworks.us/docs/sdk_api_docs/index.html
+    notes: >-
+      High-level programmatic access to Chariot services. Not published to public PyPI; the wheel is
+      served by each Chariot deployment at /docs/static/ and pre-releases are pulled from the Armory,
+      Chariot's bundled read-only Python/NPM registry. Pre-installed in Chariot Workspaces.
+  - language: python
+    registry: pypi
+    name: valor-lite
+    url: https://pypi.org/project/valor-lite/
+    install: pip install valor-lite
+    official: true
+    role: library
+    version_observed: 0.37.7
+    requires_python: '>=3.10'
+    source_code: https://github.com/Striveworks/valor
+    docs: https://striveworks.github.io/valor/
+    notes: >-
+      Lightweight numpy-based library for fast evaluation of machine learning models, maintained by
+      Striveworks. Project homepage on PyPI is https://www.striveworks.com, which is how first-party
+      ownership was confirmed. Not a Chariot API client.
+  - language: python
+    registry: github
+    name: blueprint-toolkit
+    url: https://github.com/Striveworks/blueprint-toolkit
+    install: null
+    official: true
+    role: library
+    notes: >-
+      Toolkit for training Striveworks blueprints. Published as source on GitHub only; no public
+      registry release was found.
+not_found:
+  - {registry: pypi, name: chariot, reason: 'The PyPI package named "chariot" belongs to chakki-works (an NLP preprocessing library), not Striveworks.'}
+  - {registry: pypi, name: chariot-sdk, reason: 'Unrelated third-party "Chariot plugin maker" package; author chariot@example.com.'}
+  - {registry: pypi, name: striveworks, status: 404}
+  - {registry: pypi, name: striveworks-chariot, status: 404}
+  - {registry: npm, name: '@striveworks/chariot', status: 404}
+  - {registry: npm, name: striveworks, status: 404}
+related_open_source:
+  note: >-
+    The Striveworks GitHub organization (37 public repositories) is mostly forks of the CNCF/ML
+    infrastructure Chariot is built on — kserve, knative-serving, MLServer, vllm, triton-server,
+    calico, kubernetes — plus a handful of first-party projects.
+  first_party:
+    - {name: valor, url: 'https://github.com/Striveworks/valor', language: Python}
+    - {name: terraform-provider-k3s, url: 'https://github.com/Striveworks/terraform-provider-k3s', language: Go}
+    - {name: stampede, url: 'https://github.com/Striveworks/stampede', language: Go, description: Bootstrapping Kubernetes clusters}
+    - {name: blueprint-toolkit, url: 'https://github.com/Striveworks/blueprint-toolkit', language: Python}
+    - {name: blueprint-yolo-obb, url: 'https://github.com/Striveworks/blueprint-yolo-obb', language: Python}
+    - {name: engine-yolo, url: 'https://github.com/Striveworks/engine-yolo', language: Python}
+    - {name: engine-yolo-obb, url: 'https://github.com/Striveworks/engine-yolo-obb', language: Python}
+    - {name: LIteCOW, url: 'https://github.com/Striveworks/LIteCOW', language: Python}
+    - {name: striveworks.kisi, url: 'https://github.com/Striveworks/striveworks.kisi', language: Python, description: Ansible module for managing Kisi}
+    - {name: Flyte-Wingman, url: 'https://github.com/Striveworks/Flyte-Wingman', language: JavaScript}
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/sdk/sdk', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://pypi.org/pypi/valor-lite/json', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://api.github.com/orgs/striveworks/repos', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://pypi.org/pypi/striveworks/json', http_status: 404}

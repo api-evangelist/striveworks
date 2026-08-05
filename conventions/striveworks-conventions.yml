@@ -1,0 +1,119 @@
+generated: '2026-08-05'
+method: searched
+source: https://production.chariot.striveworks.us/docs/
+summary: >-
+  Cross-cutting request/response semantics for the Chariot platform API, captured from the published
+  Chariot documentation and from anonymous probes of the Striveworks-operated Chariot instance at
+  production.chariot.striveworks.us. Chariot ships as a per-tenant deployment, so every path below is
+  relative to the customer's own Chariot host. No OpenAPI is published, so nothing here is derived from
+  a spec — every entry is either documented or observed on the wire.
+deployment_model:
+  style: per-tenant
+  note: >-
+    Chariot is installed into the customer's environment (cloud, on-prem, air-gapped or edge). The docs
+    write the host as https://<chariot_url>; there is no single shared multi-tenant api.striveworks.com.
+  observed_instance: https://production.chariot.striveworks.us
+authentication:
+  styles: [oauth2_client_credentials, http_bearer, mutual_tls]
+  token_endpoint: /auth/client/v2/chariot/login
+  header: 'Authorization: Bearer <access_token>'
+  see: authentication/striveworks-authentication.yml
+url_structure:
+  pattern: /api/{service}/{version}/{resource}
+  version_style: uri-path
+  current_version: v2
+  examples:
+    - /api/identity/v2/users/me/
+  observed_services:
+    - {service: identity, versions: [v2], evidence: 'GET /api/identity/v2/users/me/ -> 401 invalid bearer token'}
+    - {service: training, versions: [v2], evidence: 'GET /api/training/v2/* -> 401 invalid bearer token'}
+    - {service: evaluation, versions: [v2], evidence: 'GET /api/evaluation/v2/* -> 401 invalid bearer token'}
+    - {service: notification, versions: [v2], evidence: 'GET /api/notification/v2/* -> 401 invalid bearer token'}
+    - {service: catalog, versions: [v1], evidence: 'GET /api/catalog/v1/* -> 401 invalid bearer token'}
+    - {service: serve, versions: [v1, v2], evidence: 'GET /api/serve/v* -> 401 invalid bearer token'}
+    - {service: mcp, versions: [v1, v2], evidence: 'POST /api/mcp/v* -> 401 invalid bearer token'}
+  discovery_note: >-
+    Service names above were established by a control-path diff, not by a spec: routes under a real
+    service answer 401 "invalid bearer token" while unknown service names answer 404 "404 page not
+    found" (for example /api/zzzservice/v2/openapi.json -> 404, /api/identity/v2/zzz -> 401). The list
+    is therefore a floor, not the complete surface.
+error_envelope:
+  format: custom-json
+  rfc9457: false
+  shape: '{"error": "<message>"}'
+  observed:
+    - {status: 401, body: '{"error":"invalid bearer token"}', url: 'https://production.chariot.striveworks.us/api/identity/v2/users/me/'}
+    - {status: 404, body: '404 page not found', content_type: text/plain, note: 'gateway-level not-found, plain text rather than JSON'}
+  note: >-
+    Errors are not application/problem+json. Only the anonymous 401 and gateway 404 envelopes could be
+    observed without credentials; the authenticated error catalogue is not published.
+request_tracing:
+  headers:
+    - name: X-Request-ID
+      description: >-
+        Request identifier; unique when assigned by Chariot. Still in place as of 0.26.1.
+    - name: Chariot-Inference-Base-ID
+      description: >-
+        Introduced in 0.26.1 (2026-07-08). Chariot Core now uses this header instead of X-Request-ID to
+        build inference IDs, establishing a clean base identifier that supports downstream suffix
+        indexing for batched inferences and detections. Existing ID formats and the querying process
+        are unchanged.
+  source: https://production.chariot.striveworks.us/docs/release_notes/notes
+idempotency:
+  documented: false
+  notes: >-
+    No idempotency-key header, parameter or retry-safety contract is documented anywhere in the Chariot
+    documentation, and none could be observed anonymously. Do not assume idempotent writes.
+pagination:
+  documented: true
+  notes: >-
+    List surfaces (datasets, dataset views, the Training Wizard dataset selector) are paginated and
+    support sorting and filtering; datasets can be sorted by storage size as of 0.25.3 and default to
+    most-recently-updated first as of 0.26.0. The parameter names are not published outside the
+    authenticated API, so they are not recorded here.
+metadata:
+  supported: true
+  surface: inference requests
+  transport: JSON-encoded string in the `metadata` key of each input's `parameters` object
+  structure:
+    standard_metadata: 'Reserved for internal Chariot use; always pass an empty object {}.'
+    extended_metadata: >-
+      List of user-defined entries, each with `key` (string, used for filtering in the Inference Store),
+      `value` (serialized as a string; numbers must be quoted) and `type` (one of str, float, int, dict).
+  round_trip: >-
+    The inference engine is expected to copy the `metadata` field from each input's `parameters`
+    through to the corresponding output's `parameters` unchanged.
+  supported_protocols: [chariot-v1, chariot-v1-torchserve, chariot-v2, chariot-v2-kserve, huggingface-hub-v1]
+  unsupported_protocols: [openai-v1, chariot-v1-openai]
+  source: https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols
+inference_protocols:
+  concept: >-
+    A named specification that defines how Chariot communicates with an Inference Engine — the URL
+    paths used for each operation, the request format and the response format. Each protocol has a
+    unique string identifier and may support multiple task types.
+  identifiers: [chariot-v1, chariot-v1-torchserve, chariot-v1-openai, chariot-v2, chariot-v2-kserve, openai-v1, huggingface-hub-v1]
+  why_it_matters: >-
+    Drift detection, inference storage and evaluation all require Chariot to parse the request/response
+    wire format, so engines that implement a recognized protocol get those features and engines that do
+    not can still run but without them.
+  see: conformance/striveworks-conformance.yml
+rate_limiting:
+  documented: false
+  notes: No published rate-limit headers, quotas or throttling contract.
+versioning:
+  api: uri-path (v1/v2 per service)
+  platform: semantic-ish MAJOR.MINOR.PATCH releases of the Chariot product (0.26.2 at time of capture)
+  see: lifecycle/striveworks-lifecycle.yml
+cross_links:
+  authentication: authentication/striveworks-authentication.yml
+  lifecycle: lifecycle/striveworks-lifecycle.yml
+  changelog: changelog/striveworks-changelog.yml
+  cli: cli/striveworks-cli.yml
+  conformance: conformance/striveworks-conformance.yml
+  packages: packages/striveworks-packages.yml
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/user_guide/deploy-models/inference-servers/inference-protocols', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/release_notes/notes', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/api/identity/v2/users/me/', http_status: 401}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/api/zzzservice/v2/openapi.json', http_status: 404}

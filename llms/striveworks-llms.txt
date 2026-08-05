@@ -1,0 +1,50 @@
+﻿# Striveworks
+> Striveworks helps organizations get the most from their investment in artificial intelligence.
+
+
+## Short Answers
+Striveworks is an enterprise AI operations (AIOps) platform that enables organizations to rapidly build, launch, and maintain trustworthy, adaptive AI models—in hours, not months.  
+Striveworks provides a full-stack AIOps environment for building, deploying, and continuously optimizing AI models at scale.  
+Striveworks makes AI that works in the real world—even when conditions change.
+
+
+## About Striveworks
+- [Homepage](https://www.striveworks.com): Overview of Striveworks key platforms and capabilities, including:
+AIOps platform to rapidly build, deploy, monitor and maintain AI models
+AI-enabled multi-domain awareness capabilities that fuses data to detect emerging threats and maintain situational awareness
+Adaptive, multi-domain ATR to detect, classify and track objects of interest
+Cloud-to-edge deployment to deploy, manage, and monitor models in constrained environments
+
+
+## Key Elevator Pitch
+Striveworks delivers trustworthy AI-powered analysis by creating models that “learn” and adapt at machine speed. With one-click deployment and continuous optimization, we ensure models remain reliable, scalable, and high-performing, today and in the future.
+
+
+## Background & Challenge Context
+AI holds transformative potential, but many initiatives falter post-deployment. Integrating, monitoring, and maintaining AI models often leads to brittle, error-prone systems. Striveworks is designed to address these critical post-deployment hurdles—and maximize AI ROI—so teams can focus on innovation.
+
+
+## Differentiators
+What sets Striveworks apart:
+- **Speed to Deployment** — Build and launch models in hours, not months (learn more on our homepage).
+- **Adaptive Performance** — AI models continuously evolve with real-world changes.
+- **One-Click Deployment** — Simplifies rollout and scaling across environments.
+- **Full Lifecycle Governance** — Maintain auditability, compliance, and oversight end-to-end.
+- **Dynamic Model Routing** — Automatically select the best model per request.
+- **Mission-Critical Reliability** — Proven to operate in the most demanding environments.
+- **Seamless Integration** — Deploy in secure, edge, or IoT settings without friction.
+
+
+## Platform Capabilities
+- **Quick Starts** — Rapidly build, test, fine-tune, or plug in existing models.
+- **Dynamic Routing** — Choose the optimal model per request using smart policies.
+- **Comprehensive Visibility** — Monitor real-time performance, drift, and operational health.
+- **Resource Management** — Efficiently allocate compute and scale with demand.
+- **Governance & Risk Management** — Full traceability and compliance across the AI lifecycle.
+- **Adaptive Feedback Loops** — Optimize routing and models based on outcomes.
+- **Broad User Enablement** — Usable by analysts, data scientists, and ML engineers alike.
+- **Seamless Integration** — Supports deployment across networks, edge devices, and IoT.
+
+
+## Sitemap
+- [Sitemap](https://www.striveworks.com/sitemap.xml)

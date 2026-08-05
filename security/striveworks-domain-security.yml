@@ -1,0 +1,28 @@
+generated: '2026-08-05'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.striveworks.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  1 21:00:12 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: production.chariot.striveworks.us
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 16 18:17:35 2026 GMT
+  hsts: null
+domains:
+- domain: striveworks.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: striveworks.us
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

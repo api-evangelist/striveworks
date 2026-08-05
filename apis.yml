@@ -1,23 +1,126 @@
 aid: striveworks
 name: Striveworks
-description: 'Striveworks is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Striveworks is an Austin, Texas enterprise AI operations (AIOps) company whose platform, Chariot, lets
+  organizations build, deploy, monitor and continuously retrain machine-learning models — in hours rather
+  than months — across cloud, on-premises, disconnected and edge environments. Chariot covers the full
+  model lifecycle: dataset management and versioning, AI-assisted annotation, code-free and custom-code
+  training, a model catalog with model cards and staging, evaluation and model comparison, inference
+  servers and pluggable inference engines (vLLM, TorchServe, KServe v2, OpenAI-compatible and Hugging
+  Face), an inference store for querying production predictions, drift detection and monitoring, and an
+  alpha agentic-workflows framework that runs guard-railed AI agents wired to remote MCP servers.
+  Programmatic access is through a per-tenant REST API secured with OAuth 2.0 client credentials, a
+  first-party Python SDK (chariot-client) and the `chariot` CLI. Striveworks works heavily with US
+  defense and federal customers, including US Army and US Navy AI programs.
+image: https://cdn.prod.website-files.com/687f6a68c97e16777c3d2778/689f6daf828285a886335b48_open%20graph.png
 url: https://raw.githubusercontent.com/api-evangelist/striveworks/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-05'
 modified: '2026-08-05'
 tags:
 - Company
-apis: []
+- artificial-intelligence
+- machine-learning
+- mlops
+- aiops
+- model-deployment
+- model-monitoring
+- inference
+- data-annotation
+- computer-vision
+- agentic-workflows
+- defense
+- govtech
+- edge-computing
+apis:
+- name: Chariot Platform API
+  description: >-
+    Per-tenant REST API for the Chariot AI operations platform, organized as versioned microservice
+    paths under /api/{service}/{version}/ — identity, training, evaluation, notification, catalog,
+    serve and mcp were confirmed on the Striveworks-operated instance. Authentication is OAuth 2.0
+    client credentials (POST /auth/client/v2/chariot/login) returning a bearer token, with optional
+    PKI/mutual-TLS for environments that require it. Authorization is role-based over organizations
+    and projects. Striveworks publishes no OpenAPI: every /api/ route answers 401 to anonymous
+    requests, so the machine-readable contract is behind the tenant credential.
+  humanURL: https://production.chariot.striveworks.us/docs/
+  baseURL: https://production.chariot.striveworks.us/api/
+  tags:
+  - mlops
+  - aiops
+  - machine-learning
+  - model-deployment
+  - inference
+  - model-monitoring
+  - data-annotation
+  properties:
+  - type: Documentation
+    url: https://production.chariot.striveworks.us/docs/
+  - type: APIReference
+    url: https://production.chariot.striveworks.us/docs/sdk_api_docs/index.html
+  - type: GettingStarted
+    url: https://production.chariot.striveworks.us/docs/sdk/sdk
+  - type: Authentication
+    url: authentication/striveworks-authentication.yml
+  - type: Conventions
+    url: conventions/striveworks-conventions.yml
+  - type: ChangeLog
+    url: changelog/striveworks-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/striveworks-lifecycle.yml
+  - type: Conformance
+    url: conformance/striveworks-conformance.yml
+  - type: CLI
+    url: cli/striveworks-cli.yml
+  - type: SDKs
+    url: packages/striveworks-packages.yml
+common:
+- type: DomainSecurity
+  url: security/striveworks-domain-security.yml
+- type: Website
+  url: https://www.striveworks.com/
+- type: DeveloperPortal
+  url: https://production.chariot.striveworks.us/docs/
+- type: Documentation
+  url: https://production.chariot.striveworks.us/docs/
+- type: APIReference
+  url: https://production.chariot.striveworks.us/docs/sdk_api_docs/index.html
+- type: GettingStarted
+  url: https://production.chariot.striveworks.us/docs/sdk/sdk
+- type: Blog
+  url: https://www.striveworks.com/blog
+- type: GitHubOrganization
+  url: https://github.com/Striveworks
+- type: ChangeLog
+  url: https://production.chariot.striveworks.us/docs/release_notes/notes
+- type: Authentication
+  url: authentication/striveworks-authentication.yml
+- type: Conventions
+  url: conventions/striveworks-conventions.yml
+- type: Lifecycle
+  url: lifecycle/striveworks-lifecycle.yml
+- type: Conformance
+  url: conformance/striveworks-conformance.yml
+- type: CLI
+  url: cli/striveworks-cli.yml
+- type: Packages
+  url: packages/striveworks-packages.yml
+- type: SDKs
+  url: packages/striveworks-packages.yml
+- type: LLMsTxt
+  url: llms/striveworks-llms.txt
+- type: Careers
+  url: https://job-boards.greenhouse.io/striveworks
+- type: SecondaryMarket
+  url: https://forgeglobal.com/striveworks_stock/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-common:
-- type: Website
-  url: https://forgeglobal.com/striveworks_stock/
+x-enrichment:
+  date: '2026-08-05'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

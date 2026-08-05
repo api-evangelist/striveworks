@@ -1,0 +1,55 @@
+generated: '2026-08-05'
+method: searched
+source: https://production.chariot.striveworks.us/docs/release_notes/notes
+versioning:
+  api_scheme: uri-path
+  api_current: v2
+  api_note: >-
+    Each Chariot microservice carries its own path version — /api/identity/v2/, /api/training/v2/,
+    /api/evaluation/v2/, /api/notification/v2/, /api/serve/v1|v2/, /api/catalog/v1/, /api/mcp/v1|v2/.
+    Version negotiation is by path only; no version header or date-based train is documented.
+  platform_scheme: MAJOR.MINOR.PATCH
+  platform_current: 0.26.2
+  docs: https://production.chariot.striveworks.us/docs/release_notes/notes
+release_notes:
+  url: https://production.chariot.striveworks.us/docs/release_notes/notes
+  cadence: dated, roughly every two to three weeks
+  sections: [What's New, What's Improved, What's Fixed, Deprecation Warnings]
+  see: changelog/striveworks-changelog.yml
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  practice: >-
+    Deprecations are announced in a "Deprecation Warnings" section of the dated release notes when they
+    occur (for example 0.25.3 removed RStudio as a standard workspace application). There is no
+    separate deprecation policy document, no published notice period, and no RFC 8594 Sunset or
+    Deprecation header support was found in the documentation.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA. Chariot is deployed into the customer's own environment — cloud, on-premises,
+    air-gapped or edge — so availability is a function of the customer's infrastructure and the
+    contract, not of a Striveworks-operated shared service.
+status_page: null
+status_page_note: >-
+  No status page exists or could exist for a shared service, because there is no shared service.
+  status.striveworks.com does not resolve (NXDOMAIN). The nearest operational surfaces are in-product:
+  Inference Engine readiness details, model Monitor views and drift checks.
+support:
+  documented_channels:
+    - {channel: administrator, note: 'The docs direct users to "your administrator" for feature enablement (e.g. Agentic Workflows requires a Forge license).'}
+    - {channel: email, value: info@striveworks.com, source: 'https://api.github.com/orgs/striveworks (public organization email)'}
+    - {channel: slack, value: 'striveworks-public.slack.com (shared invite linked from the Valor README)', probe_status: 403, note: 'Slack join endpoint returned 403 to an anonymous probe; not asserted as a working public support channel.'}
+  public_help_center: false
+feature_maturity:
+  - {feature: Agentic Workflows, stage: alpha, gate: 'Visible only to organizations with a Forge license who have the feature enabled.', source: 'https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/'}
+deprecated_operations: []
+deprecated_operations_note: >-
+  Cannot be derived — Striveworks publishes no OpenAPI, and every /api/ route on the observed instance
+  requires a bearer token.
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/release_notes/notes', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://status.striveworks.com/', http_status: 0, note: 'DNS NXDOMAIN — host does not resolve.'}

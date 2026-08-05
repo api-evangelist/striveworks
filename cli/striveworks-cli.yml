@@ -1,0 +1,58 @@
+generated: '2026-08-05'
+method: searched
+source: https://production.chariot.striveworks.us/docs/sdk/sdk
+name: chariot
+description: >-
+  First-party command line interface for the Chariot platform. Installed as part of the Chariot Python
+  SDK (the chariot-client wheel installs both a Python package and a CLI tool named `chariot`), and
+  pre-installed in Chariot Workspaces. Used to configure client credentials and, via the `awm`
+  sub-command, to build, configure, stage, run and chat with agentic workflows.
+docs:
+  install: https://production.chariot.striveworks.us/docs/sdk/sdk
+  agentic_workflows: https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/example-chariot-cli
+install:
+  - method: pip (from your own Chariot instance)
+    command: pip install https://<chariot_host>/docs/static/chariot_client-0.26.2-py3-none-any.whl
+    note: >-
+      The wheel is served by the Chariot deployment itself; the version in the path tracks the
+      platform release (0.26.2 at time of capture).
+  - method: pip (pre-release from the Armory)
+    command: '%pip install --user --upgrade --pre chariot-client'
+    note: >-
+      Chariot ships with the Armory, a read-only registry for Python and NPM/CommonJS packages.
+      Requires a Chariot Workspace configured to pull from an Armory that shipped a pre-release SDK.
+      Use %pip, not !pip, inside Jupyter.
+  - method: preinstalled
+    command: null
+    note: The SDK and CLI are automatically installed in Chariot workspaces.
+commands:
+  - command: chariot init
+    group: setup
+    description: >-
+      Configure client credentials for the SDK/CLI. Accepts a downloaded credentials JSON file or
+      interactive entry.
+    flags:
+      - {flag: '--credentials', value: credentials.json, description: Path to the client credentials JSON downloaded from the Chariot user profile.}
+  - command: chariot awm
+    group: agentic-workflows
+    description: >-
+      Launch the agentic workflow menu — a terminal application for creating and managing agentic
+      workflows. Navigated with arrow keys and Enter.
+    flows:
+      - Select a Chariot project (projects must be created in the web portal, not the CLI).
+      - 'Configurations → Agent: create an agent from a JSON template (name, key, description, config.model_settings, config.system_prompt, config.tool_profiles).'
+      - 'Stage an agent version to Production before a workflow can reference it.'
+      - 'Configurations → Workflow: create a workflow whose agent_graph.agent_refs point at a staged agent by ref (::agent::<agent-key>::production).'
+      - 'Stage the workflow version to Production.'
+      - 'List workflows → Chat → New session to start a chat session with the workflow.'
+    chat_features:
+      - Create and switch between sessions.
+      - View session chat history.
+      - 'Slash commands, e.g. /exit to leave the chat and return to the Workflows menu.'
+availability_note: >-
+  Agentic Workflows are an alpha feature visible only to organizations with a Forge license who have
+  the feature enabled.
+packages: packages/striveworks-packages.yml
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/sdk/sdk', http_status: 200}
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/user_guide/agentic-workflows/example-chariot-cli', http_status: 200}

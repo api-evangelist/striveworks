@@ -1,0 +1,97 @@
+generated: '2026-08-05'
+method: searched
+source: https://production.chariot.striveworks.us/docs/release_notes/notes
+docs: https://production.chariot.striveworks.us/docs/release_notes/notes
+scheme:
+  style: MAJOR.MINOR.PATCH
+  cadence: >-
+    Dated release notes, roughly every two to three weeks. Each entry is grouped into "What's New",
+    "What's Improved", "What's Fixed" and, where applicable, "Deprecation Warnings".
+  current_version: 0.26.2
+  current_version_source: https://production.chariot.striveworks.us/docs/
+window: recent
+entries:
+  - version: 0.26.1
+    date: '2026-07-08'
+    breaking: false
+    highlights:
+      - CPU-based vLLM engine option for compatible deployments.
+      - Top requesting users — breakdown of the 10 users with the highest request counts per model under Monitor on the Models page.
+      - Interactive example inference protocol requests and responses on the Chariot-Recognized Inference Protocols page.
+      - Users can be created and added to Chariot Core without automatic organization assignment.
+      - Effective permissions now show when they are elevated by organization role or project visibility.
+      - Inference Engines support deep linking for sharing.
+      - >-
+        Chariot Core now uses a new Chariot-Inference-Base-ID header instead of X-Request-ID to build
+        inference IDs; existing ID formats and the querying process are unchanged and X-Request-ID
+        remains in place.
+    fixes:
+      - Drift checks no longer take prohibitively long to load.
+  - version: 0.26.0
+    date: '2026-06-25'
+    breaking: false
+    highlights:
+      - >-
+        Inference Engine Library — fuller UI for managing Inference Engines, including search/sort,
+        engine documentation and readiness details, environment variable schemas and engine settings.
+      - >-
+        Legacy models are migrated to Inference Engines; users no longer select a model framework or
+        artifact type during upload.
+      - Text datum metadata is viewable when previewing text datums.
+      - Dataset lists default to most-recently-updated first.
+      - Token metrics reported for models served through the OpenAI proxy engine.
+      - Model upload can prepopulate names and metadata for models exported from Chariot.
+      - Transformers version updated to support newer Hugging Face models.
+    fixes:
+      - Bounding boxes and segmentations must now be completely within image boundaries.
+      - Fixed pagination of the dataset selector in the Training Wizard.
+      - Annotation tasks can no longer be started for deleted datasets.
+  - version: 0.25.4
+    date: '2026-06-08'
+    breaking: false
+    highlights:
+      - Keyboard shortcuts for next, previous and skip sample in the Annotation Editor.
+    fixes:
+      - Fixed dataset-upload caching bug, significantly decreasing upload times.
+  - version: 0.25.3
+    date: '2026-05-22'
+    breaking: false
+    highlights:
+      - Datasets API supports sorting datasets by storage size.
+      - Models using the Azure OpenAI inference engine report token metrics.
+      - Improved dataset and dataset view list page performance.
+    fixes:
+      - SDK infer() no longer waits indefinitely on a model without an active inference service.
+      - Fixed model comparison and annotation-task-after-dataset-deletion handling.
+    deprecations:
+      - RStudio removed as a standard workspace application.
+  - version: 0.25.2
+    date: '2026-05-08'
+    breaking: false
+    fixes:
+      - Model upload exception path fixed so upload failures no longer surface as unhandled errors.
+      - Fixed large image preview cut-off in inference display.
+      - Fixed scrolling in Model Card Template view and a draw-overlap issue in object-detection annotation.
+  - version: 0.25.1
+    date: '2026-04-24'
+    breaking: false
+    highlights:
+      - Automatic restart for Training Runs interrupted by infrastructure rotation.
+      - Inference Server configuration display exposes custom engine fields and server state.
+      - Custom Inference Engine version and environment variable options in Model Version Settings.
+    fixes:
+      - Improved workspace scheduling so workspaces are less likely to stick in Pending.
+  - version: 0.25.0
+    date: '2026-04-03'
+    breaking: false
+    highlights:
+      - Model Card Templates configurable at organization or project level.
+      - vLLM token-level metrics.
+      - User-scoped secrets management under Profile → Secrets.
+      - Model license data visible under Model Version Details, with filtering by license.
+      - Hugging Face import file-tree view for selective inclusion of repository contents.
+      - Object-detection crosshair annotation aid.
+    fixes:
+      - Hugging Face model revisions are no longer ignored during import via UI and SDK.
+x-evidence:
+  - {fetched: '2026-08-05', url: 'https://production.chariot.striveworks.us/docs/release_notes/notes', http_status: 200}

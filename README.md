@@ -42,5 +42,19 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Striveworks is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/striveworks_stock/
+Striveworks is an Austin, Texas enterprise AI operations (AIOps) company whose platform, Chariot, lets
+organizations build, deploy, monitor and continuously retrain machine-learning models across cloud,
+on-premises, disconnected and edge environments. Programmatic access is through a per-tenant REST API
+secured with OAuth 2.0 client credentials, a first-party Python SDK (`chariot-client`) and the
+`chariot` CLI.
+
+- Website: https://www.striveworks.com/
+- Chariot documentation: https://production.chariot.striveworks.us/docs/
+- GitHub organization: https://github.com/Striveworks
+- Secondary-market listing: https://forgeglobal.com/striveworks_stock/
+
+**Note on coverage.** Striveworks publishes no OpenAPI. Chariot is deployed per tenant, and every
+`/api/{service}/{version}/` route on the Striveworks-operated instance returns
+`401 {"error":"invalid bearer token"}` to anonymous requests, so the machine-readable contract sits
+behind the tenant credential. The artifacts in this repository are captured from the public Chariot
+documentation and from anonymous probes, not from a spec.
