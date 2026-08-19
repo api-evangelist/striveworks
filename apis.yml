@@ -16,7 +16,7 @@ image: https://cdn.prod.website-files.com/687f6a68c97e16777c3d2778/689f6daf82828
 url: https://raw.githubusercontent.com/api-evangelist/striveworks/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 created: '2026-08-05'
 modified: '2026-08-05'
 tags:
