@@ -21,6 +21,21 @@ created: '2026-08-05'
 modified: '2026-08-05'
 tags:
 - Company
+- Artificial Intelligence
+- Machine-Learning
+- MLOps
+- AIOps
+- Model Deployment
+- Model Monitoring
+- Inference
+- Data Annotation
+- Computer-Vision
+- Agentic Workflows
+- Defense
+- GovTech
+- Edge Computing
+tags_raw:
+- Company
 - artificial-intelligence
 - machine-learning
 - mlops
@@ -47,6 +62,14 @@ apis:
   humanURL: https://production.chariot.striveworks.us/docs/
   baseURL: https://production.chariot.striveworks.us/api/
   tags:
+  - MLOps
+  - AIOps
+  - Machine-Learning
+  - Model Deployment
+  - Inference
+  - Model Monitoring
+  - Data Annotation
+  tags_raw:
   - mlops
   - aiops
   - machine-learning
