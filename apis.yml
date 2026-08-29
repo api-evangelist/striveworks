@@ -12,6 +12,17 @@ description: >-
   Programmatic access is through a per-tenant REST API secured with OAuth 2.0 client credentials, a
   first-party Python SDK (chariot-client) and the `chariot` CLI. Striveworks works heavily with US
   defense and federal customers, including US Army and US Navy AI programs.
+deliveryModel:
+  model: library
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/687f6a68c97e16777c3d2778/689f6daf828285a886335b48_open%20graph.png
 url: https://raw.githubusercontent.com/api-evangelist/striveworks/refs/heads/main/apis.yml
 x-type: company
