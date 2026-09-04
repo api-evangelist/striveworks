@@ -23,6 +23,19 @@ deliveryModel:
   - none
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: low
+  source:
+  - authentication
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://cdn.prod.website-files.com/687f6a68c97e16777c3d2778/689f6daf828285a886335b48_open%20graph.png
 url: https://raw.githubusercontent.com/api-evangelist/striveworks/refs/heads/main/apis.yml
 x-type: company
