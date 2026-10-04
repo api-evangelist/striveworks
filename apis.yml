@@ -46,14 +46,14 @@ modified: '2026-08-05'
 tags:
 - Company
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 - MLOps
 - AIOps
 - Model Deployment
 - Model Monitoring
 - Inference
 - Data Annotation
-- Computer-Vision
+- Computer Vision
 - Agentic Workflows
 - Defense
 - GovTech
@@ -73,6 +73,8 @@ tags_raw:
 - defense
 - govtech
 - edge-computing
+- Machine-Learning
+- Computer-Vision
 apis:
 - name: Chariot Platform API
   description: >-
@@ -88,7 +90,7 @@ apis:
   tags:
   - MLOps
   - AIOps
-  - Machine-Learning
+  - Machine Learning
   - Model Deployment
   - Inference
   - Model Monitoring
@@ -101,6 +103,7 @@ apis:
   - inference
   - model-monitoring
   - data-annotation
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://production.chariot.striveworks.us/docs/
