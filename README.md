@@ -64,19 +64,90 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Striveworks is an Austin, Texas enterprise AI operations (AIOps) company whose platform, Chariot, lets
-organizations build, deploy, monitor and continuously retrain machine-learning models across cloud,
-on-premises, disconnected and edge environments. Programmatic access is through a per-tenant REST API
-secured with OAuth 2.0 client credentials, a first-party Python SDK (`chariot-client`) and the
-`chariot` CLI.
+Striveworks is an Austin, Texas enterprise AI operations (AIOps) company whose platform, Chariot, lets organizations build, deploy, monitor and continuously retrain machine-learning models — in hours rather than months — across cloud, on-premises, disconnected and edge environments. Chariot covers the full model lifecycle: dataset management and versioning, AI-assisted annotation, code-free and custom-code training, a model catalog with model cards and staging, evaluation and model comparison, inference servers and pluggable inference engines (vLLM, TorchServe, KServe v2, OpenAI-compatible and Hugging Face), an inference store for querying production predictions, drift detection and monitoring, and an alpha agentic-workflows framework that runs guard-railed AI agents wired to remote MCP servers. Programmatic access is through a per-tenant REST API secured with OAuth 2.0 client credentials, a first-party Python SDK (chariot-client) and the `chariot` CLI. Striveworks works heavily with US defense and federal customers, including US Army and US Navy AI programs.
 
-- Website: https://www.striveworks.com/
-- Chariot documentation: https://production.chariot.striveworks.us/docs/
-- GitHub organization: https://github.com/Striveworks
-- Secondary-market listing: https://forgeglobal.com/striveworks_stock/
+**Areas:** Company · Artificial Intelligence · Machine Learning · MLOps · AIOps · Model Deployment · Model Monitoring · Inference · Data Annotation · Computer Vision · Agentic Workflows · Defense
 
-**Note on coverage.** Striveworks publishes no OpenAPI. Chariot is deployed per tenant, and every
-`/api/{service}/{version}/` route on the Striveworks-operated instance returns
-`401 {"error":"invalid bearer token"}` to anonymous requests, so the machine-readable contract sits
-behind the tenant credential. The artifacts in this repository are captured from the public Chariot
-documentation and from anonymous probes, not from a spec.
+## Striveworks on APIs.io
+
+Everything profiled for Striveworks is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/striveworks/](https://apis.io/providers/striveworks/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Chariot Platform API](https://apis.io/apis/striveworks/chariot-platform-api/) — Per-tenant REST API for the Chariot AI operations platform, organized as versioned microservice paths under /api/{service}/{version}/ — identity, training,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Striveworks Authentication](https://apis.io/security/striveworks/striveworks-authentication/)
+- [Striveworks Domain Security](https://apis.io/security/striveworks/striveworks-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.striveworks.com/)
+- [Documentation](https://production.chariot.striveworks.us/docs/)
+- [Getting started](https://production.chariot.striveworks.us/docs/sdk/sdk)
+- [API reference](https://production.chariot.striveworks.us/docs/sdk_api_docs/index.html)
+- [Changelog](https://production.chariot.striveworks.us/docs/release_notes/notes)
+- [Blog](https://medium.com/@striveworks)
+- [GitHub](https://github.com/Striveworks)
+
+## API Evangelist rating
+
+**Kin Score 25.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 66.7 |
+| Access clarity | 0.0 |
+
+**Agent readiness 2.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.5** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/striveworks/](https://apis.io/providers/striveworks/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Striveworks: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/striveworks/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
